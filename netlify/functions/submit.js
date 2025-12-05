@@ -1,6 +1,5 @@
 const DEFAULT_ENDPOINT =
   'https://script.google.com/macros/s/AKfycbw3ye7157kZX4v1kZJydn1HLEIyBXP6XqdcALLNg1TcgKn1unjaB3YKwCv8HrCmx5ZdSg/exec';
-const DEFAULT_API_KEY = ':p2es6"85RAb';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -19,19 +18,14 @@ export const handler = async (event) => {
 
   try {
     const endpoint = process.env.MUNDO_MASCOTA_ENDPOINT || DEFAULT_ENDPOINT;
-    const serverApiKey = process.env.MUNDO_MASCOTA_KEY || DEFAULT_API_KEY;
-    const incomingApiKey = event.headers['x-api-key'] || event.headers['X-Api-Key'];
-
     const payload = JSON.parse(event.body || '{}');
 
     const headers = { 'Content-Type': 'application/json' };
-    const apiKeyToSend = serverApiKey || incomingApiKey;
-    if (apiKeyToSend) headers['x-api-key'] = apiKeyToSend;
 
     const upstreamResponse = await fetch(endpoint, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ ...payload, apiKey: apiKeyToSend }),
+      body: JSON.stringify(payload),
     });
 
     const text = await upstreamResponse.text();

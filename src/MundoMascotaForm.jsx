@@ -7,7 +7,7 @@ const maxPets = 5;
 const SUBMIT_URL =
   (import.meta.env.VITE_MUNDO_MASCOTA_ENDPOINT || '').trim() ||
   '/.netlify/functions/submit';
-const API_KEY = (import.meta.env.VITE_MUNDO_MASCOTA_KEY || '').trim() || ':p2es6"85RAb';
+const API_KEY = (import.meta.env.VITE_MUNDO_MASCOTA_KEY || '').trim();
 
 const createEmptyPet = () => ({
   name: '',
@@ -59,10 +59,6 @@ function MundoMascotaForm() {
 
     try {
       const headers = { 'Content-Type': 'application/json' };
-      if (API_KEY) {
-        headers['x-api-key'] = API_KEY;
-      }
-
       const response = await fetch(SUBMIT_URL, {
         method: 'POST',
         headers,
