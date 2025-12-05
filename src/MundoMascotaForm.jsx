@@ -46,8 +46,8 @@ function MundoMascotaForm() {
     setStatusMessage('');
     setIsSubmitting(true);
 
-    if (!API_KEY || !SUBMIT_URL) {
-      setStatusMessage('Configura la clave y el endpoint antes de enviar.');
+    if (!SUBMIT_URL) {
+      setStatusMessage('Configura el endpoint antes de enviar.');
       setIsSubmitting(false);
       return;
     }
@@ -59,7 +59,9 @@ function MundoMascotaForm() {
 
     try {
       const headers = { 'Content-Type': 'application/json' };
-      headers['x-api-key'] = API_KEY;
+      if (API_KEY) {
+        headers['x-api-key'] = API_KEY;
+      }
 
       const response = await fetch(SUBMIT_URL, {
         method: 'POST',
