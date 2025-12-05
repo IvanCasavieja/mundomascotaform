@@ -6,9 +6,8 @@ import './MundoMascotaForm.css';
 const maxPets = 5;
 const SUBMIT_URL =
   (import.meta.env.VITE_MUNDO_MASCOTA_ENDPOINT || '').trim() ||
-  'https://script.google.com/macros/s/AKfycbz6KNpsJmJ3pA0FG_WMX_687CsHKVbLjT0jFE95LmpLnptQQm9cAWBUCYU2vCHK8hu1Nw/exec';
-const API_KEY =
-  (import.meta.env.VITE_MUNDO_MASCOTA_KEY || '').trim() || ':p2es6"85RAb';
+  '/.netlify/functions/submit';
+const API_KEY = (import.meta.env.VITE_MUNDO_MASCOTA_KEY || '').trim();
 
 const createEmptyPet = () => ({
   name: '',
