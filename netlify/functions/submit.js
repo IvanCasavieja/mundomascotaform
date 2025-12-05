@@ -1,5 +1,5 @@
 const DEFAULT_ENDPOINT =
-  'https://script.google.com/macros/s/AKfycbz0P_E0GIB14x1HUyTr0b_bTW709rBdyL1NyY4gztVGiR5SkWPlYNYiQbHvmrepYGfwuA/exec';
+  'https://script.google.com/macros/s/AKfycbw3ye7157kZX4v1kZJydn1HLEIyBXP6XqdcALLNg1TcgKn1unjaB3YKwCv8HrCmx5ZdSg/exec';
 const DEFAULT_API_KEY = ':p2es6"85RAb';
 
 const corsHeaders = {
@@ -31,7 +31,7 @@ export const handler = async (event) => {
     const upstreamResponse = await fetch(endpoint, {
       method: 'POST',
       headers,
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ ...payload, apiKey: apiKeyToSend }),
     });
 
     const text = await upstreamResponse.text();
