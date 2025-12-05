@@ -1,5 +1,5 @@
 const DEFAULT_ENDPOINT =
-  'https://script.google.com/macros/s/AKfycby9pZZDTZJ7STVIdt-Am9ykrCXH7YF1bwfqhUeeKZblcgD9TcPBffBaMAy8P6ICStL_aQ/exec';
+  'https://script.google.com/macros/s/AKfycbwq7SLPXK6QyXJfbi9xYKTA8D2c5VQjBJ6fcVqVzsIusMmg-h1ni1Ogt3wsk4ZRPoXH/exec';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
