@@ -34,14 +34,32 @@ export const handler = async (event) => {
     });
 
     const text = await upstreamResponse.text();
+    let statusCode = upstreamResponse.status;
+    let body = text;
+
+    // Si el Apps Script responde con JSON { ok: false }, devolvemos 400 para que el front lo vea como error.
+    try {
+      const parsed = JSON.parse(text);
+      if (parsed && parsed.ok === false) {
+        statusCode = 400;
+        body = JSON.stringify(parsed);
+      } else {
+        body = JSON.stringify(parsed);
+      }
+    } catch {
+      // Si no es JSON y el upstream fue 200, lo consideramos fallo de backend.
+      if (upstreamResponse.ok) {
+        statusCode = 502;
+      }
+    }
 
     return {
-      statusCode: upstreamResponse.status,
+      statusCode,
       headers: {
         ...corsHeaders,
         'Content-Type': 'application/json',
       },
-      body: text,
+      body,
     };
   } catch (error) {
     console.error('Proxy error', error);
